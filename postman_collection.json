@@ -1,0 +1,561 @@
+{
+  "info": {
+    "name": "Playlist API",
+    "description": "Complete API collection for the Playlist API with sample data",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "item": [
+        {
+          "name": "Check API Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/health",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["health"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": ["{{baseUrl}}"],
+              "path": ["users"]
+            }
+          }
+        },
+        {
+          "name": "Get User by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "1"]
+            }
+          }
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Sarah Williams\",\n  \"email\": \"sarah.williams@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": ["{{baseUrl}}"],
+              "path": ["users"]
+            }
+          }
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Sarah M. Williams\",\n  \"email\": \"sarah.m.williams@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Artists",
+      "item": [
+        {
+          "name": "Get All Artists",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/artists",
+              "host": ["{{baseUrl}}"],
+              "path": ["artists"]
+            }
+          }
+        },
+        {
+          "name": "Get Artist by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/artists/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["artists", "1"]
+            }
+          }
+        },
+        {
+          "name": "Create Artist",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Kavinsky\",\n  \"bio\": \"French house artist known for the Drive soundtrack\",\n  \"image_url\": \"https://example.com/artists/kavinsky.jpg\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/artists",
+              "host": ["{{baseUrl}}"],
+              "path": ["artists"]
+            }
+          }
+        },
+        {
+          "name": "Update Artist",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bio\": \"French musician, producer and actor known for electro house and synthwave\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/artists/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["artists", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Artist",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/artists/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["artists", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Albums",
+      "item": [
+        {
+          "name": "Get All Albums",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/albums",
+              "host": ["{{baseUrl}}"],
+              "path": ["albums"]
+            }
+          }
+        },
+        {
+          "name": "Get Album by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/albums/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["albums", "1"]
+            }
+          }
+        },
+        {
+          "name": "Create Album",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"OutRun\",\n  \"release_year\": 2013,\n  \"cover_art_url\": \"https://example.com/albums/outrun.jpg\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/albums",
+              "host": ["{{baseUrl}}"],
+              "path": ["albums"]
+            }
+          }
+        },
+        {
+          "name": "Update Album",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"OutRun (Deluxe Edition)\",\n  \"release_year\": 2013\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/albums/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["albums", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Album",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/albums/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["albums", "1"]
+            }
+          }
+        },
+        {
+          "name": "Link Artist to Album",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"artist_id\": 2\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/albums/1/artists",
+              "host": ["{{baseUrl}}"],
+              "path": ["albums", "1", "artists"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Songs",
+      "item": [
+        {
+          "name": "Get All Songs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/songs",
+              "host": ["{{baseUrl}}"],
+              "path": ["songs"]
+            }
+          }
+        },
+        {
+          "name": "Get Song by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/songs/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["songs", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Songs by Artist",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/songs/artist/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["songs", "artist", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Songs by Album",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/songs/album/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["songs", "album", "1"]
+            }
+          }
+        },
+        {
+          "name": "Create Song",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Nightcall\",\n  \"duration\": 264,\n  \"file_url\": \"https://example.com/songs/nightcall.mp3\",\n  \"album_id\": 1,\n  \"artist_ids\": [1, 2]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/songs",
+              "host": ["{{baseUrl}}"],
+              "path": ["songs"]
+            }
+          }
+        },
+        {
+          "name": "Update Song",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Nightcall (Extended Version)\",\n  \"duration\": 324\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/songs/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["songs", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Song",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/songs/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["songs", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Playlists",
+      "item": [
+        {
+          "name": "Get All Playlists",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/playlists",
+              "host": ["{{baseUrl}}"],
+              "path": ["playlists"]
+            }
+          }
+        },
+        {
+          "name": "Get Playlist by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/playlists/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["playlists", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Playlists by User",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/playlists/user/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["playlists", "user", "1"]
+            }
+          }
+        },
+        {
+          "name": "Create Playlist",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Synthwave Essentials\",\n  \"description\": \"Best synthwave tracks for late night coding\",\n  \"user_id\": 1,\n  \"is_public\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/playlists",
+              "host": ["{{baseUrl}}"],
+              "path": ["playlists"]
+            }
+          }
+        },
+        {
+          "name": "Update Playlist",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Synthwave Classics\",\n  \"description\": \"The ultimate synthwave collection for productivity\",\n  \"is_public\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/playlists/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["playlists", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Playlist",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/playlists/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["playlists", "1"]
+            }
+          }
+        },
+        {
+          "name": "Add Song to Playlist",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"song_id\": 8,\n  \"position\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/playlists/1/songs",
+              "host": ["{{baseUrl}}"],
+              "path": ["playlists", "1", "songs"]
+            }
+          }
+        },
+        {
+          "name": "Remove Song from Playlist",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/playlists/1/songs/8",
+              "host": ["{{baseUrl}}"],
+              "path": ["playlists", "1", "songs", "8"]
+            }
+          }
+        },
+        {
+          "name": "Reorder Song in Playlist",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"new_position\": 3\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/playlists/1/songs/8/position",
+              "host": ["{{baseUrl}}"],
+              "path": ["playlists", "1", "songs", "8", "position"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
