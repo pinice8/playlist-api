@@ -1,0 +1,94 @@
+# Playlist API - Cursor Rules
+
+## Git Commit Convention
+
+Always use semantic commit messages following the Conventional Commits specification.
+
+### Commit Message Format
+
+```
+<type>(<scope>): <subject>
+
+<body>
+
+<footer>
+```
+
+### Types
+
+- **feat**: A new feature for the user
+- **fix**: A bug fix
+- **docs**: Documentation only changes
+- **style**: Changes that do not affect the meaning of the code (formatting, missing semicolons, etc.)
+- **refactor**: A code change that neither fixes a bug nor adds a feature
+- **perf**: A code change that improves performance
+- **test**: Adding missing tests or correcting existing tests
+- **chore**: Changes to the build process, auxiliary tools, or dependencies
+- **ci**: Changes to CI configuration files and scripts
+
+### Scope (optional)
+
+The scope should be the name of the area affected:
+- **api**: API routes and endpoints
+- **db**: Database schema, migrations, or queries
+- **songs**: Song-related functionality
+- **artists**: Artist-related functionality
+- **albums**: Album-related functionality
+- **playlists**: Playlist-related functionality
+- **users**: User-related functionality
+- **middleware**: Express middleware
+- **types**: TypeScript type definitions
+- **config**: Configuration files
+
+### Examples
+
+```bash
+feat(playlists): add ability to duplicate playlists
+fix(songs): correct duration calculation for songs
+docs(readme): update API endpoint documentation
+refactor(db): optimize query performance for playlist retrieval
+chore(deps): upgrade express to version 5.1.0
+test(artists): add unit tests for artist controller
+style(api): format code with prettier
+perf(db): add index on song_artists table
+```
+
+### Breaking Changes
+
+If the commit introduces breaking changes, add `BREAKING CHANGE:` in the footer:
+
+```
+feat(api): change playlist response format
+
+BREAKING CHANGE: The playlist endpoint now returns songs as an array of objects instead of IDs
+```
+
+### Subject Guidelines
+
+- Use imperative, present tense: "add" not "added" nor "adds"
+- Don't capitalize first letter
+- No period (.) at the end
+- Keep under 72 characters
+
+### Body Guidelines (optional)
+
+- Explain the motivation for the change
+- Contrast with previous behavior
+- Wrap at 72 characters
+
+## Code Style
+
+- Use TypeScript strict mode
+- Prefer `const` over `let`
+- Use async/await over promises when possible
+- Always handle errors with try/catch in controllers
+- Use meaningful variable names
+- Add comments for complex logic only
+
+## Project-Specific Guidelines
+
+- All database queries should be in controllers
+- Use the ApiError class for throwing HTTP errors
+- Always validate required fields before database operations
+- Use transaction blocks for operations that modify multiple tables
+- Follow REST conventions for route naming
