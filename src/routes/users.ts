@@ -6,7 +6,13 @@ import {
   updateUser,
   deleteUser,
 } from '../controllers/users.js';
+import { validateBody } from '../middleware/validate.js';
+import { createUserSchema, updateUserSchema } from '../types/validation.js';
 
+/**
+ * User routes with Zod validation middleware.
+ * All POST and PUT routes validate request bodies before reaching controllers.
+ */
 const router = Router();
 
 // GET /api/users - Get all users
@@ -16,10 +22,10 @@ router.get('/', getAllUsers);
 router.get('/:id', getUserById);
 
 // POST /api/users - Create new user
-router.post('/', createUser);
+router.post('/', validateBody(createUserSchema), createUser);
 
 // PUT /api/users/:id - Update user
-router.put('/:id', updateUser);
+router.put('/:id', validateBody(updateUserSchema), updateUser);
 
 // DELETE /api/users/:id - Delete user
 router.delete('/:id', deleteUser);

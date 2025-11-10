@@ -6,7 +6,13 @@ import {
   updateArtist,
   deleteArtist,
 } from '../controllers/artists.js';
+import { validateBody } from '../middleware/validate.js';
+import { createArtistSchema, updateArtistSchema } from '../types/validation.js';
 
+/**
+ * Artist routes with Zod validation middleware.
+ * All POST and PUT routes validate request bodies before reaching controllers.
+ */
 const router = Router();
 
 // GET /api/artists - Get all artists
@@ -16,10 +22,10 @@ router.get('/', getAllArtists);
 router.get('/:id', getArtistById);
 
 // POST /api/artists - Create new artist
-router.post('/', createArtist);
+router.post('/', validateBody(createArtistSchema), createArtist);
 
 // PUT /api/artists/:id - Update artist
-router.put('/:id', updateArtist);
+router.put('/:id', validateBody(updateArtistSchema), updateArtist);
 
 // DELETE /api/artists/:id - Delete artist
 router.delete('/:id', deleteArtist);

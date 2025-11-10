@@ -10,7 +10,21 @@ import {
   reorderSong,
   getPlaylistsByUser,
 } from '../controllers/playlists.js';
+import { validateBody } from '../middleware/validate.js';
+import {
+  createPlaylistSchema,
+  updatePlaylistSchema,
+  addSongToPlaylistSchema,
+  reorderSongSchema
+} from '../types/validation.js';
 
+/**
+ * Playlist routes with Zod validation middleware.
+ * All POST and PUT routes validate request bodies before reaching controllers.
+ *
+ * IMPORTANT: Routes are ordered specifically - /user/:userId must come before /:id
+ * to prevent route conflicts.
+ */
 const router = Router();
 
 // GET /api/playlists - Get all playlists
@@ -23,21 +37,21 @@ router.get('/user/:userId', getPlaylistsByUser);
 router.get('/:id', getPlaylistById);
 
 // POST /api/playlists - Create new playlist
-router.post('/', createPlaylist);
+router.post('/', validateBody(createPlaylistSchema), createPlaylist);
 
 // PUT /api/playlists/:id - Update playlist
-router.put('/:id', updatePlaylist);
+router.put('/:id', validateBody(updatePlaylistSchema), updatePlaylist);
 
 // DELETE /api/playlists/:id - Delete playlist
 router.delete('/:id', deletePlaylist);
 
 // POST /api/playlists/:id/songs - Add song to playlist
-router.post('/:id/songs', addSongToPlaylist);
+router.post('/:id/songs', validateBody(addSongToPlaylistSchema), addSongToPlaylist);
 
 // DELETE /api/playlists/:id/songs/:songId - Remove song from playlist
 router.delete('/:id/songs/:songId', removeSongFromPlaylist);
 
 // PUT /api/playlists/:id/songs/:songId/position - Reorder song in playlist
-router.put('/:id/songs/:songId/position', reorderSong);
+router.put('/:id/songs/:songId/position', validateBody(reorderSongSchema), reorderSong);
 
 export default router;
