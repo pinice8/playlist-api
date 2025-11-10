@@ -55,10 +55,6 @@ export function createAlbum(req: Request, res: Response, next: NextFunction) {
   try {
     const { title, release_year, cover_art_url }: CreateAlbum = req.body;
 
-    if (!title) {
-      throw new ApiError(400, 'Title is required');
-    }
-
     const insert = db.prepare(
       'INSERT INTO albums (title, release_year, cover_art_url) VALUES (?, ?, ?)'
     );
@@ -123,10 +119,6 @@ export function addArtistToAlbum(req: Request, res: Response, next: NextFunction
   try {
     const { id } = req.params;
     const { artist_id } = req.body;
-
-    if (!artist_id) {
-      throw new ApiError(400, 'artist_id is required');
-    }
 
     const album = db.prepare('SELECT * FROM albums WHERE id = ?').get(id);
     if (!album) {

@@ -53,10 +53,6 @@ export function createPlaylist(req: Request, res: Response, next: NextFunction) 
   try {
     const { name, description, user_id, is_public }: CreatePlaylist = req.body;
 
-    if (!name || !user_id) {
-      throw new ApiError(400, 'Name and user_id are required');
-    }
-
     // Verify user exists
     const user = db.prepare('SELECT * FROM users WHERE id = ?').get(user_id);
     if (!user) {
@@ -128,10 +124,6 @@ export function addSongToPlaylist(req: Request, res: Response, next: NextFunctio
     const { id } = req.params;
     const { song_id, position } = req.body;
 
-    if (!song_id) {
-      throw new ApiError(400, 'song_id is required');
-    }
-
     const playlist = db.prepare('SELECT * FROM playlists WHERE id = ?').get(id);
     if (!playlist) {
       throw new ApiError(404, 'Playlist not found');
@@ -194,10 +186,6 @@ export function reorderSong(req: Request, res: Response, next: NextFunction) {
   try {
     const { id, songId } = req.params;
     const { new_position } = req.body;
-
-    if (new_position === undefined) {
-      throw new ApiError(400, 'new_position is required');
-    }
 
     const link = db.prepare(
       'SELECT * FROM playlist_songs WHERE playlist_id = ? AND song_id = ?'

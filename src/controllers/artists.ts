@@ -55,10 +55,6 @@ export function createArtist(req: Request, res: Response, next: NextFunction) {
   try {
     const { name, bio, image_url }: CreateArtist = req.body;
 
-    if (!name) {
-      throw new ApiError(400, 'Name is required');
-    }
-
     const insert = db.prepare(
       'INSERT INTO artists (name, bio, image_url) VALUES (?, ?, ?)'
     );

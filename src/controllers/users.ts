@@ -35,10 +35,6 @@ export function createUser(req: Request, res: Response, next: NextFunction) {
   try {
     const { name, email }: CreateUser = req.body;
 
-    if (!name || !email) {
-      throw new ApiError(400, 'Name and email are required');
-    }
-
     // Check if email already exists
     const existingUser = db.prepare('SELECT * FROM users WHERE email = ?').get(email);
     if (existingUser) {

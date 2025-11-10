@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from 'express';
 import db from '../db/connection.js';
 import { ApiError } from '../middleware/errorHandler.js';
-import type { Song, SongWithDetails, CreateSong } from '../types/models.js';
+import type { Song, SongWithDetails } from '../types/models.js';
 
 // Get all songs
 export function getAllSongs(_req: Request, res: Response, next: NextFunction) {
@@ -51,15 +51,7 @@ export function getSongById(req: Request, res: Response, next: NextFunction) {
 // Create new song
 export function createSong(req: Request, res: Response, next: NextFunction) {
   try {
-    const { title, duration, file_url, album_id, artist_ids }: CreateSong = req.body;
-
-    if (!title || !duration) {
-      throw new ApiError(400, 'Title and duration are required');
-    }
-
-    if (!artist_ids || artist_ids.length === 0) {
-      throw new ApiError(400, 'At least one artist is required');
-    }
+    const { title, duration, file_url, album_id, artist_ids } = req.body;
 
     const insert = db.prepare(
       'INSERT INTO songs (title, duration, file_url, album_id) VALUES (?, ?, ?, ?)'
@@ -68,9 +60,9 @@ export function createSong(req: Request, res: Response, next: NextFunction) {
     const result = insert.run(title, duration, file_url || null, album_id || null);
     const songId = result.lastInsertRowid;
 
-    // Link artists
+    // Link artists (validated by middleware, guaranteed to exist)
     const linkArtist = db.prepare('INSERT INTO song_artists (song_id, artist_id) VALUES (?, ?)');
-    artist_ids.forEach(artistId => {
+    artist_ids.forEach((artistId: number) => {
       linkArtist.run(songId, artistId);
     });
 
