@@ -1,21 +1,23 @@
-# Playlist API
+# 🎵 Playlist API
 
 A TypeScript Express REST API for managing playlists, songs, artists, and albums. Built with SQLite for data persistence.
 
-## Features
+## ✨ Features
 
-- **Songs**: CRUD operations, filter by artist/album
-- **Artists**: CRUD operations, get with songs and albums
-- **Albums**: CRUD operations, get with artists and songs
-- **Playlists**: CRUD operations, add/remove/reorder songs
-- **Users**: Basic CRUD operations for playlist ownership
+- 🎵 **Songs**: CRUD operations, filter by artist/album
+- 🎤 **Artists**: CRUD operations, get with songs and albums
+- 💿 **Albums**: CRUD operations, get with artists and songs
+- 📝 **Playlists**: CRUD operations, add/remove/reorder songs
+- 👤 **Users**: Basic CRUD operations for playlist ownership
+- ✅ **Validation**: Comprehensive Zod schema validation on all endpoints
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 - **Runtime**: Node.js with TypeScript
 - **Framework**: Express 5
 - **Database**: SQLite (better-sqlite3)
-- **Dev Tools**: tsx for development
+- **Validation**: Zod for runtime schema validation
+- **Dev Tools**: tsx for development with hot reload
 
 ## Project Structure
 
@@ -35,7 +37,7 @@ playlist-api/
 └── tsconfig.json         # TypeScript configuration
 ```
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
@@ -44,27 +46,39 @@ playlist-api/
 
 ### Installation
 
-1. Clone or navigate to the project directory:
+1. **Clone or navigate to the project directory:**
 ```bash
 cd playlist-api
 ```
 
-2. Install dependencies:
+2. **Install dependencies:**
 ```bash
 npm install
 ```
 
-3. Create environment file (already exists):
+3. **Create environment file:**
 ```bash
 cp .env.example .env
 ```
 
-4. Initialize and seed the database:
+The `.env` file contains the following configuration options:
+
+| Variable | Description | Default Value |
+|----------|-------------|---------------|
+| `PORT` | Server port number | `3000` |
+| `DATABASE_PATH` | Path to SQLite database file | `./data/playlist.db` |
+| `NODE_ENV` | Environment mode (development/production) | `development` |
+
+> 💡 **Tip**: In development mode, error responses include detailed error messages. In production, sensitive details are hidden.
+
+4. **Initialize and seed the database:**
 ```bash
 npm run db:seed
 ```
 
-### Running the Server
+This will create sample data including users, artists, albums, songs, and playlists. 🎉
+
+### 🏃 Running the Server
 
 **Development mode** (with hot reload):
 ```bash
@@ -77,25 +91,27 @@ npm run build
 npm start
 ```
 
-The API will be available at `http://localhost:3000`
+The API will be available at `http://localhost:3000` 🌐
 
-### Database Commands
+### 🗄️ Database Commands
 
 ```bash
-# Initialize empty database
+# Initialize empty database (creates schema only)
 npm run db:init
 
-# Seed database with sample data
+# Seed database with sample data (drops existing tables & creates fresh data)
 npm run db:seed
 ```
 
-## API Endpoints
+> ⚠️ **Warning**: `npm run db:seed` will delete all existing data!
 
-### Health Check
+## 📡 API Endpoints
+
+### 💚 Health Check
 
 - `GET /health` - Check API status
 
-### Users
+### 👤 Users
 
 - `GET /api/users` - Get all users
 - `GET /api/users/:id` - Get user by ID
@@ -103,7 +119,7 @@ npm run db:seed
 - `PUT /api/users/:id` - Update user
 - `DELETE /api/users/:id` - Delete user
 
-### Artists
+### 🎤 Artists
 
 - `GET /api/artists` - Get all artists
 - `GET /api/artists/:id` - Get artist with songs and albums
@@ -111,7 +127,7 @@ npm run db:seed
 - `PUT /api/artists/:id` - Update artist
 - `DELETE /api/artists/:id` - Delete artist
 
-### Albums
+### 💿 Albums
 
 - `GET /api/albums` - Get all albums
 - `GET /api/albums/:id` - Get album with artists and songs
@@ -120,7 +136,7 @@ npm run db:seed
 - `DELETE /api/albums/:id` - Delete album
 - `POST /api/albums/:id/artists` - Link artist to album
 
-### Songs
+### 🎵 Songs
 
 - `GET /api/songs` - Get all songs
 - `GET /api/songs/:id` - Get song with artists and album
@@ -130,7 +146,7 @@ npm run db:seed
 - `PUT /api/songs/:id` - Update song
 - `DELETE /api/songs/:id` - Delete song
 
-### Playlists
+### 📝 Playlists
 
 - `GET /api/playlists` - Get all playlists
 - `GET /api/playlists/:id` - Get playlist with songs
@@ -142,9 +158,32 @@ npm run db:seed
 - `DELETE /api/playlists/:id/songs/:songId` - Remove song from playlist
 - `PUT /api/playlists/:id/songs/:songId/position` - Reorder song
 
-## API Examples
+## 🧪 Testing the API
 
-### Create a new artist
+### Option 1: Using Postman (Recommended) 📮
+
+We've included a complete Postman collection with all API endpoints and sample requests!
+
+1. **Import the collection:**
+   - Open Postman
+   - Click **Import** button
+   - Select `postman_collection.json` from the project root
+   - The collection will appear in your sidebar
+
+2. **Set up environment variables (optional):**
+   - Create a new environment in Postman
+   - Add variable: `baseUrl` = `http://localhost:3000`
+
+3. **Start making requests!** 🚀
+   - All endpoints are pre-configured with sample data
+   - Requests are organized by resource (Users, Artists, Albums, Songs, Playlists)
+   - Try the "Health Check" first to verify the server is running
+
+> 💡 **Pro Tip**: The collection includes examples for all CRUD operations, filtering, and relationship management!
+
+### Option 2: Using cURL 💻
+
+#### Create a new artist
 ```bash
 curl -X POST http://localhost:3000/api/artists \
   -H "Content-Type: application/json" \
@@ -155,7 +194,7 @@ curl -X POST http://localhost:3000/api/artists \
   }'
 ```
 
-### Create a new song
+#### Create a new song
 ```bash
 curl -X POST http://localhost:3000/api/songs \
   -H "Content-Type: application/json" \
@@ -167,7 +206,7 @@ curl -X POST http://localhost:3000/api/songs \
   }'
 ```
 
-### Create a playlist
+#### Create a playlist
 ```bash
 curl -X POST http://localhost:3000/api/playlists \
   -H "Content-Type: application/json" \
@@ -179,7 +218,7 @@ curl -X POST http://localhost:3000/api/playlists \
   }'
 ```
 
-### Add song to playlist
+#### Add song to playlist
 ```bash
 curl -X POST http://localhost:3000/api/playlists/1/songs \
   -H "Content-Type: application/json" \
@@ -189,35 +228,35 @@ curl -X POST http://localhost:3000/api/playlists/1/songs \
   }'
 ```
 
-### Get playlist with all songs
+#### Get playlist with all songs
 ```bash
 curl http://localhost:3000/api/playlists/1
 ```
 
-## Database Schema
+## 🗂️ Database Schema
 
 ### Core Tables
-- **users**: User accounts
-- **artists**: Music artists
-- **albums**: Music albums
-- **songs**: Individual tracks
-- **playlists**: User-created playlists
+- 👤 **users**: User accounts
+- 🎤 **artists**: Music artists
+- 💿 **albums**: Music albums
+- 🎵 **songs**: Individual tracks
+- 📝 **playlists**: User-created playlists
 
-### Junction Tables
-- **song_artists**: Links songs to artists (many-to-many)
-- **album_artists**: Links albums to artists (many-to-many)
-- **playlist_songs**: Links songs to playlists with position ordering
+### Junction Tables (Many-to-Many Relationships)
+- 🔗 **song_artists**: Links songs to artists (many-to-many)
+- 🔗 **album_artists**: Links albums to artists (many-to-many)
+- 🔗 **playlist_songs**: Links songs to playlists with position ordering
 
-## Error Handling
+## ⚠️ Error Handling
 
 The API returns appropriate HTTP status codes:
-- `200` - Success
-- `201` - Created
-- `204` - No Content (successful deletion)
-- `400` - Bad Request
-- `404` - Not Found
-- `409` - Conflict (duplicate entry)
-- `500` - Internal Server Error
+- ✅ `200` - Success
+- ✨ `201` - Created
+- 🗑️ `204` - No Content (successful deletion)
+- ❌ `400` - Bad Request (validation error)
+- 🔍 `404` - Not Found
+- ⚔️ `409` - Conflict (duplicate entry)
+- 💥 `500` - Internal Server Error
 
 Error responses include a JSON body:
 ```json
@@ -227,7 +266,17 @@ Error responses include a JSON body:
 }
 ```
 
-## Development
+### Validation Errors
+
+Zod validation provides detailed field-level error messages:
+```json
+{
+  "error": "Validation failed: email: Invalid email format, name: Name is required",
+  "status": 400
+}
+```
+
+## 🛠️ Development
 
 ### TypeScript Compilation
 
@@ -239,19 +288,19 @@ npm run build
 
 - **TypeScript**: Configured for ES2022 with strict mode
 - **Module System**: ES Modules (type: "module")
-- **Environment**: Uses Node's native --env-file flag
+- **Environment**: Uses Node's native --env-file flag (requires Node 20+)
 
-## Future Enhancements
+## 🚀 Future Enhancements
 
-- Authentication & authorization
-- Search functionality
-- Pagination for large datasets
-- File upload for song/image storage
-- Play history tracking
-- Like/favorite functionality
-- Genre management
-- Playlist collaboration features
+- 🔐 Authentication & authorization
+- 🔎 Search functionality
+- 📄 Pagination for large datasets
+- 📁 File upload for song/image storage
+- 📊 Play history tracking
+- ❤️ Like/favorite functionality
+- 🎸 Genre management
+- 🤝 Playlist collaboration features
 
-## License
+## 📄 License
 
 ISC
